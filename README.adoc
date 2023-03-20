@@ -30,6 +30,17 @@ gem 'oscal'
 
 TODO: Write usage instructions here
 
+[source,ruby]
+----
+> require 'oscal'
+> x = Oscal::Catalog.load_from_yaml('spec/oscal-content/examples/catalog/yaml/basic-catalog.yaml')
+=>
+#<Oscal::Catalog:0x000000010b817e08
+...
+> x.groups.first.groups.first.parts.first.prose
+=> "To establish a management framework to initiate and control the implementation and operation of information security within the organization."
+----
+
 == Ruby library usage
 
 TODO: Write usage instructions here

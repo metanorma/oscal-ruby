@@ -1,3 +1,5 @@
+require 'date'
+
 module Oscal
   class Catalog
     attr_accessor :uuid, :metadata, :groups
@@ -8,7 +10,17 @@ module Oscal
     end
 
     def self.load_from_yaml(path)
-      yaml_data = YAML.load_file(path, permitted_classes: [Time, Date, DateTime])
+
+      # Psych >= 4 requires permitted_classes to load such classes
+      # https://github.com/ruby/psych/issues/533
+      begin
+        yaml_data = YAML.load_file(
+          path,
+          permitted_classes: [::Time, ::Date, ::DateTime]
+        )
+      rescue ArgumentError
+        yaml_data = YAML.load_file(path)
+      end
 
       yaml_catalog = yaml_data['catalog']
 
