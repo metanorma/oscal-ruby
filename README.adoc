@@ -1,5 +1,15 @@
 = OSCAL in Ruby
 
+== Purpose
+
+This is an implementation of the OSCAL models, allowing the manipulation of
+these models, as well as reading and writing of OSCAL serialization formats
+(YAML, JSON, XML).
+
+NOTE: This gem is used by the
+https://github.com/metanorma/metanorma-plugin-oscal[Metanorma plugin for OSCAL].
+
+
 == Installation
 
 Install the gem:
