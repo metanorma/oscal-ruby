@@ -1,6 +1,6 @@
 module Oscal
   class Group
-    KEYS = %i(id class title controls props parts groups).freeze
+    KEYS = %i(id class title params props links parts groups controls)
     attr_accessor *KEYS
 
     def self.wrap(obj)
@@ -14,33 +14,30 @@ module Oscal
 
     def initialize(options = {})
       options.each_pair.each do |key, val|
-        key_name = attr_name_by_key(key)
+        key_name = key.gsub("-", "_")
 
         unless KEYS.include?(key_name.to_sym)
           raise UnknownAttributeError.new("Unknown key `#{key}` in Group")
         end
 
-        val = cast_value_by_key(key_name, val)
-        send("#{key_name}=", val)
-      end
-    end
+        val = case key_name
+        when 'params'
+          Parameter.wrap(val)
+        when 'props'
+          Property.wrap(val)
+        when 'links'
+          Link.wrap(val)
+        when 'parts'
+          Part.wrap(val)
+        when 'groups'
+          Group.wrap(val)
+        when 'controls'
+          Control.wrap(val)
+        else
+          val
+        end
 
-    def attr_name_by_key(key)
-      key.gsub("-", "_")
-    end
-
-    def cast_value_by_key(key_name, val)
-      case key_name
-      when "groups"
-        Group.wrap(val)
-      when "params"
-        Parameter.wrap(val)
-      when "props"
-        Property.wrap(val)
-      when "parts"
-        Part.wrap(val)
-      else
-        val
+        self.send("#{key_name}=", val)
       end
     end
   end

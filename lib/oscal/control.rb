@@ -1,6 +1,6 @@
 module Oscal
   class Control
-    KEY = %i(id title params props parts).freeze
+    KEY = %i(id class title params props links parts controls)
     attr_accessor *KEY
 
     def self.wrap(obj)
@@ -20,21 +20,22 @@ module Oscal
           raise UnknownAttributeError.new("Unknown key `#{key}` in Control")
         end
 
-        val = cast_value_by_key(key_name, val)
-        send("#{key_name}=", val)
-      end
-    end
+        val = case key_name
+        when 'params'
+          Parameter.wrap(val)
+        when 'props'
+          Property.wrap(val)
+        when 'links'
+          Link.wrap(val)
+        when 'parts'
+          Part.wrap(val)
+        when 'controls'
+          Control.wrap(val)
+        else
+          val
+        end
 
-    def cast_value_by_key(key_name, val)
-      case key_name
-      when "params"
-        Parameter.wrap(val)
-      when "props"
-        Property.wrap(val)
-      when "parts"
-        Part.wrap(val)
-      else
-        val
+        self.send("#{key_name}=", val)
       end
     end
   end

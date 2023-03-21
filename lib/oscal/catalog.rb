@@ -1,22 +1,36 @@
+require_relative "serializer"
+
 require "date"
 
 module Oscal
   class Catalog
-    attr_accessor :uuid, :metadata, :groups
+    include Serializer
 
-    def initialize(metadata, groups)
-      @metadata = MetadataBlock.new(metadata)
-      @groups = Group.wrap(groups)
+    KEY = %i(uuid metadata params controls groups back_matter)
+    attr_accessor *KEY
+    attr_serializable *KEY
+
+    def initialize(uuid, metadata, params, controls, groups, back_matter)
+      @uuid        = uuid
+      @metadata    = MetadataBlock.new(metadata)
+      @params      = Parameter.wrap(params) if params
+      @controls    = Control.wrap(controls) if controls
+      @groups      = Group.wrap(groups) if groups
+      @back_matter = BackMatter.wrap(back_matter) if back_matter
     end
 
     def self.load_from_yaml(path)
-      yaml_data = safe_load_yaml(path)
-      yaml_catalog = yaml_data["catalog"]
+      yaml_data     = safe_load_yaml(path)
+      yaml_catalog  = yaml_data["catalog"]
 
-      metadata = yaml_catalog["metadata"]
-      group_data = yaml_catalog["groups"]
+      uuid          = yaml_catalog['uuid']
+      metadata      = yaml_catalog['metadata']
+      params        = yaml_catalog['params']
+      controls      = yaml_catalog['controls']
+      groups        = yaml_catalog['groups']
+      back_matter   = yaml_catalog['back-matter']
 
-      Catalog.new(metadata, group_data)
+      Catalog.new(uuid, metadata, params, controls, groups, back_matter)
     end
 
     # Psych >= 4 requires permitted_classes to load such classes
