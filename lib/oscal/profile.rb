@@ -1,5 +1,5 @@
 module Oscal
-    class Profile
+  class Profile
     attr_accessor :metadata, :imports, :controls
 
     def initialize(metadata, imports, controls)

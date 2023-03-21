@@ -4,8 +4,9 @@ module Oscal
   class Part
     include Serializer
 
-    KEY = %i(id name prose)
+    KEY = %i(id name prose).freeze
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def self.wrap(obj)
@@ -17,15 +18,15 @@ module Oscal
       end
     end
 
-    def initialize(options={})
-      options.each_pair.each do |key,val|
-        key_name = key.gsub('-','_')
+    def initialize(options = {})
+      options.each_pair.each do |key, val|
+        key_name = key.gsub("-", "_")
 
         unless KEY.include?(key_name.to_sym)
           raise UnknownAttributeError.new("Unknown key `#{key}` in Part")
         end
 
-        self.send("#{key_name}=", val)
+        send("#{key_name}=", val)
       end
     end
   end

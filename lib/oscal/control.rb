@@ -1,6 +1,6 @@
 module Oscal
   class Control
-    KEY = %i(id title params props parts)
+    KEY = %i(id title params props parts).freeze
     attr_accessor *KEY
 
     def self.wrap(obj)
@@ -12,26 +12,29 @@ module Oscal
       end
     end
 
-    def initialize(options={})
-      options.each_pair.each do |key,val|
-        key_name = key.gsub('-','_')
+    def initialize(options = {})
+      options.each_pair.each do |key, val|
+        key_name = key.gsub("-", "_")
 
         unless KEY.include?(key_name.to_sym)
           raise UnknownAttributeError.new("Unknown key `#{key}` in Control")
         end
 
-        val = case key_name
-        when 'params'
-          Parameter.wrap(val)
-        when 'props'
-          Property.wrap(val)
-        when 'parts'
-          Part.wrap(val)
-        else
-          val
-        end
+        val = cast_value_by_key(key_name, val)
+        send("#{key_name}=", val)
+      end
+    end
 
-        self.send("#{key_name}=", val)
+    def cast_value_by_key(key_name, val)
+      case key_name
+      when "params"
+        Parameter.wrap(val)
+      when "props"
+        Property.wrap(val)
+      when "parts"
+        Part.wrap(val)
+      else
+        val
       end
     end
   end

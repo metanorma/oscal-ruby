@@ -1,10 +1,10 @@
-require 'yaml'
+require "yaml"
 
 module Oscal
   module Serializer
     def to_h
       instance_variables.each_with_object({}) do |var, hash|
-        var_name = var.to_s.delete('@')
+        var_name = var.to_s.delete("@")
         hash[var_name] = instance_variable_get(var)
       end
     end
@@ -36,7 +36,7 @@ module Oscal
       end
 
       def from_yaml(yaml_string)
-        data = YAML.load(yaml_string)
+        data = YAML.safe_load(yaml_string)
         from_h(data)
       end
 
@@ -54,7 +54,9 @@ module Oscal
         attrs.each do |attr|
           attribute_names << attr.to_sym
           define_method(attr) { instance_variable_get("@#{attr}") }
-          define_method("#{attr}=") { |value| instance_variable_set("@#{attr}", value) }
+          define_method("#{attr}=") do |value|
+            instance_variable_set("@#{attr}", value)
+          end
         end
       end
     end

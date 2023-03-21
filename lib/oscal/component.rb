@@ -10,5 +10,4 @@ module Oscal
       @properties = properties
     end
   end
-
 end
