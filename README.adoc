@@ -41,6 +41,34 @@ TODO: Write usage instructions here
 => "To establish a management framework to initiate and control the implementation and operation of information security within the organization."
 ----
 
+Find object by id
+
+[source,ruby]
+----
+> require 'oscal'
+> x = Oscal::Catalog.load_from_yaml('spec/oscal-content/examples/catalog/yaml/basic-catalog.yaml')
+=>
+#<Oscal::Catalog:0x000000010b817e08
+...
+> p = x.find_object_by_id('s1.1_smt')
+=>
+#<Oscal::Part:0x000000014c0c4070 @id="s1.1_smt", ...>
+----
+
+Find object by uuid
+
+[source,ruby]
+----
+> require 'oscal'
+> x = Oscal::Catalog.load_from_yaml('spec/oscal-content/examples/catalog/yaml/basic-catalog.yaml')
+=>
+#<Oscal::Catalog:0x000000010b817e08
+...
+> p = x.find_object_by_id('74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724', x, :uuid)
+=>
+#<Oscal::Catalog:0x000000014c0c5f38 @uuid="74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724", ...>
+----
+
 == Ruby library usage
 
 TODO: Write usage instructions here
