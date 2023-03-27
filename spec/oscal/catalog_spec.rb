@@ -16,6 +16,11 @@ RSpec.describe Oscal::Catalog do
     )
   end
 
+  it "gets all controls" do
+    expect(subject.class).to be Oscal::Catalog
+    expect(subject.get_all_controls.count).to eq(4)
+  end
+
   it "find object by id" do
     obj = subject.find_object_by_id('s2.1_smt')
     expect(obj.to_s).to match(/Oscal::Part/)

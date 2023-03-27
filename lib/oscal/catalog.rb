@@ -17,6 +17,8 @@ module Oscal
       @controls    = Control.wrap(controls) if controls
       @groups      = Group.wrap(groups) if groups
       @back_matter = BackMatter.wrap(back_matter) if back_matter
+
+      @all_controls = []
     end
 
     def self.load_from_yaml(path)
@@ -43,6 +45,30 @@ module Oscal
     rescue ArgumentError
       YAML.load_file(path)
     end
+
+    def get_all_controls
+      append_all_control_group(self)
+      @all_controls.uniq
+    end
+
+    def append_all_control_group(obj)
+      if obj.to_s.match(/Oscal::Control/)
+        @all_controls << obj
+      end
+
+      if obj.respond_to?(:controls) && !obj.controls.nil?
+        obj.controls.each do |c|
+          append_all_control_group(c)
+        end
+      end
+
+      if obj.respond_to?(:groups) && !obj.groups.nil?
+        obj.groups.each do |g|
+          append_all_control_group(g)
+        end
+      end
+    end
+
     def find_object_by_id(id, obj = self, attribute_name = :id)
       if obj.respond_to?(attribute_name) && obj.send(attribute_name) == id
         return obj
