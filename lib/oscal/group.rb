@@ -1,6 +1,7 @@
 module Oscal
   class Group
-    KEYS = %i(id class title params props links parts groups controls)
+    KEYS = %i(id class title params props links parts groups
+      controls insert_controls)
     attr_accessor *KEYS
 
     def self.wrap(obj)
@@ -33,6 +34,8 @@ module Oscal
           Group.wrap(val)
         when 'controls'
           Control.wrap(val)
+        when 'insert_controls'
+          InsertControl.wrap(val)
         else
           val
         end
