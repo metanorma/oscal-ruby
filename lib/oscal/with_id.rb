@@ -1,7 +1,7 @@
-require_relative "serializer"
+require_relative "base_class"
 
 module Oscal
-  class WithId
+  class WithId < Oscal::BaseClass
     include Serializer
 
     KEY = %i(val)
@@ -19,15 +19,17 @@ module Oscal
     end
 
     def initialize(options = {})
+      klass = self.class
+
       unless options.is_a? Hash
-        options = {'val' => options}
+        options = {KEY.first.to_s => options}
       end
 
       options.each_pair.each do |key, val|
         key_name = key.gsub("-", "_")
 
         unless KEY.include?(key_name.to_sym)
-          raise UnknownAttributeError.new("Unknown key `#{key}` in WithId")
+          raise UnknownAttributeError.new("Unknown key `#{key}` in #{klass.name}")
         end
 
         send("#{key_name}=", val)

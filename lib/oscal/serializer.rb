@@ -44,6 +44,17 @@ module Oscal
         raise NotImplementedError, "#{self}#from_xml not implemented!"
       end
 
+      # Psych >= 4 requires permitted_classes to load such classes
+      # https://github.com/ruby/psych/issues/533
+      def safe_load_yaml(path)
+        YAML.load_file(
+          path,
+          permitted_classes: [::Time, ::Date, ::DateTime],
+        )
+      rescue ArgumentError
+        YAML.load_file(path)
+      end
+
       private
 
       def attribute_names
