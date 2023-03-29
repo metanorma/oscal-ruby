@@ -1,8 +1,10 @@
 require_relative "serializer"
+require_relative "common_utils"
 
 module Oscal
   class Profile
     include Serializer
+    include CommonUtils
 
     KEY = %i(uuid metadata imports merge modify back_matter)
     attr_accessor *KEY
@@ -29,17 +31,6 @@ module Oscal
       back_matter   = yaml_profile['back-matter']
 
       Profile.new(uuid, metadata, imports, merge, modify, back_matter)
-    end
-
-    # Psych >= 4 requires permitted_classes to load such classes
-    # https://github.com/ruby/psych/issues/533
-    def self.safe_load_yaml(path)
-      YAML.load_file(
-        path,
-        permitted_classes: [::Time, ::Date, ::DateTime],
-      )
-    rescue ArgumentError
-      YAML.load_file(path)
     end
   end
 end

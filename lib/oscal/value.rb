@@ -1,7 +1,7 @@
-require_relative "serializer"
+require_relative "base_class"
 
 module Oscal
-  class Value
+  class Value < Oscal::BaseClass
     include Serializer
 
     KEY = %i(val)
