@@ -8,7 +8,7 @@ module Oscal
       res = nil
 
       obj.instance_variables.each do |ins_var|
-        val = obj.send(ins_var.to_s.delete('@').to_sym)
+        val = obj.send(ins_var.to_s.delete("@").to_sym)
 
         if val.is_a? Array
           val.each do |v|

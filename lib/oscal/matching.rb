@@ -5,6 +5,7 @@ module Oscal
     KEY = %i(pattern)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
   end
 end

@@ -5,11 +5,12 @@ module Oscal
     KEY = %i(resources)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'resources'
+      when "resources"
         Resource.wrap(val)
       else
         val

@@ -5,13 +5,14 @@ module Oscal
     KEY = %i(with_child_controls with_ids matching)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'with_ids'
+      when "with_ids"
         WithId.wrap(val)
-      when 'matching'
+      when "matching"
         Matching.wrap(val)
       else
         val

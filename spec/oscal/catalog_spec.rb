@@ -22,14 +22,15 @@ RSpec.describe Oscal::Catalog do
   end
 
   it "find object by id" do
-    obj = subject.find_object_by_id('s2.1_smt')
+    obj = subject.find_object_by_id("s2.1_smt")
     expect(obj.to_s).to match(/Oscal::Part/)
     expect(obj.prose).to eq(
-      "To limit access to information and information processing facilities.")
+      "To limit access to information and information processing facilities.",
+    )
   end
 
   it "find object by uuid" do
-    uuid = '74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724'
+    uuid = "74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724"
     obj = subject.find_object_by_id(
       uuid, subject, :uuid
     )

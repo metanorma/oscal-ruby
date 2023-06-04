@@ -5,13 +5,14 @@ module Oscal
     KEY = %i(control_id klass removes adds)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'removes'
+      when "removes"
         Remove.wrap(val)
-      when 'adds'
+      when "adds"
         Add.wrap(val)
       else
         val

@@ -5,15 +5,16 @@ module Oscal
     KEY = %i(id name ns klass title props prose parts links)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'props'
+      when "props"
         Property.wrap(val)
-      when 'parts'
+      when "parts"
         Part.wrap(val)
-      when 'links'
+      when "links"
         Link.wrap(val)
       else
         val

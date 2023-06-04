@@ -5,17 +5,18 @@ module Oscal
     KEY = %i(position by_id title params props links parts)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'params'
+      when "params"
         Parameter.wrap(val)
-      when 'props'
+      when "props"
         Property.wrap(val)
-      when 'links'
+      when "links"
         Link.wrap(val)
-      when 'part'
+      when "part"
         Part.wrap(val)
       else
         val

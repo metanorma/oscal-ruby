@@ -3,24 +3,25 @@ require_relative "base_class"
 module Oscal
   class Parameter < Oscal::BaseClass
     KEY = %i(id klass depneds_on props links label usage
-      constraints guidelines values select remarks)
+             constraints guidelines values select remarks)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'props'
+      when "props"
         Property.wrap(val)
-      when 'links'
+      when "links"
         Link.wrap(val)
-      when 'constraints'
+      when "constraints"
         Constraint.wrap(val)
-      when 'guidelines'
+      when "guidelines"
         Guideline.wrap(val)
-      when 'values'
+      when "values"
         Value.wrap(val)
-      when 'select'
+      when "select"
         Select.wrap(val)
       else
         val

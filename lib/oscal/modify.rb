@@ -5,13 +5,14 @@ module Oscal
     KEY = %i(set_parameters alters)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'set_parameters'
+      when "set_parameters"
         SetParameter.wrap(val)
-      when 'alters'
+      when "alters"
         Alter.wrap(val)
       else
         val

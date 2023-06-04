@@ -5,13 +5,14 @@ module Oscal
     KEY = %i(text props links)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'props'
+      when "props"
         Property.wrap(val)
-      when 'links'
+      when "links"
         Link.wrap(val)
       else
         val

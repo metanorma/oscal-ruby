@@ -5,6 +5,7 @@ module Oscal
     KEY = %i(href rel media_type text)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
   end
 end

@@ -5,6 +5,7 @@ module Oscal
     KEY = %i(schema identifier)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
   end
 end

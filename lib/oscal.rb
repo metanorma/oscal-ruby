@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Dir[File.join(__dir__, 'oscal', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, "oscal", "*.rb")].each { |file| require file }
 
 module Oscal
   class Error < StandardError; end

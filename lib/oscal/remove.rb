@@ -5,6 +5,7 @@ module Oscal
     KEY = %i(by_name by_class by_id by_item_name by_ns)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
   end
 end

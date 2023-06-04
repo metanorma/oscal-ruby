@@ -5,11 +5,12 @@ module Oscal
     KEY = %i(href media_type hashes)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def set_value(key_name, val)
       case key_name
-      when 'hashes'
+      when "hashes"
         HashObject.wrap(val)
       else
         val

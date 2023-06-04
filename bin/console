@@ -14,9 +14,9 @@ require "oscal"
 require "irb"
 
 def reload!(print = true)
-  puts 'Reloading ...' if print
+  puts "Reloading ..." if print
   # Main project directory.
-  root_dir = File.expand_path('..', __dir__)
+  root_dir = File.expand_path("..", __dir__)
   # Directories within the project that should be reloaded.
   reload_dirs = %w{lib}
   # Loop through and reload every file in all relevant project directories.

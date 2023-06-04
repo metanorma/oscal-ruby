@@ -7,6 +7,7 @@ module Oscal
     KEY = %i(val)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def self.wrap(obj)
@@ -23,16 +24,16 @@ module Oscal
       klass = self.class
 
       unless options.is_a? Hash
-        options = {klass::KEY.first.to_s => options}
+        options = { klass::KEY.first.to_s => options }
       end
 
       options.each_pair.each do |key, val|
         key_name = key.gsub("-", "_")
-        key_name = 'klass' if key == 'class'
+        key_name = "klass" if key == "class"
 
         unless klass::KEY.include?(key_name.to_sym)
           raise UnknownAttributeError.new(
-            "Unknown key `#{key}` in #{klass.name}"
+            "Unknown key `#{key}` in #{klass.name}",
           )
         end
 
@@ -42,7 +43,7 @@ module Oscal
       end
     end
 
-    def set_value(key_name, val)
+    def set_value(_key_name, val)
       val
     end
   end

@@ -8,6 +8,7 @@ module Oscal
 
     KEY = %i(uuid metadata imports merge modify back_matter)
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def initialize(uuid, metadata, imports, merge, modify, back_matter)
@@ -23,12 +24,12 @@ module Oscal
       yaml_data     = safe_load_yaml(path)
       yaml_profile  = yaml_data["profile"]
 
-      uuid          = yaml_profile['uuid']
-      metadata      = yaml_profile['metadata']
-      imports       = yaml_profile['imports']
-      merge         = yaml_profile['merge']
-      modify        = yaml_profile['modify']
-      back_matter   = yaml_profile['back-matter']
+      uuid          = yaml_profile["uuid"]
+      metadata      = yaml_profile["metadata"]
+      imports       = yaml_profile["imports"]
+      merge         = yaml_profile["merge"]
+      modify        = yaml_profile["modify"]
+      back_matter   = yaml_profile["back-matter"]
 
       Profile.new(uuid, metadata, imports, merge, modify, back_matter)
     end

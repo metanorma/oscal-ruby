@@ -7,6 +7,7 @@ module Oscal
     KEY = %i(val)
 
     attr_accessor *KEY
+
     attr_serializable *KEY
 
     def self.wrap(obj)
@@ -22,7 +23,7 @@ module Oscal
       klass = self.class
 
       unless options.is_a? Hash
-        options = {KEY.first.to_s => options}
+        options = { KEY.first.to_s => options }
       end
 
       options.each_pair.each do |key, val|
