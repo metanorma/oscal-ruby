@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
+require "coradoc"
+
 RSpec.describe Oscal::Catalog do
+  describe ".from_coradoc" do
+    it "parses the coradoc document to catalog" do
+      sample_file = Oscal.root_path.join(
+        "spec", "fixtures", "iso27002.min.adoc"
+      )
+
+      document = Coradoc::Document.from_adoc(sample_file)
+      catalog = Oscal::Catalog.from_coradoc(document)
+
+      pp catalog
+    end
+  end
+
   let(:subject) do
     Oscal::Catalog.load_from_yaml(
       "spec/oscal-content/examples/catalog/yaml/basic-catalog.yaml",
