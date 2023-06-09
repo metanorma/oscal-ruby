@@ -1,0 +1,128 @@
+= Catalog for ISO27002:2022
+:published: '2023-03-08T09:51:08+08:00'
+:last-modified: '2023-03-08T09:51:08+08:00'
+:version: '1.0'
+:oscal-version: 1.0.0
+:remarks: OSCAL yaml generated from ISO27002:2022
+
+[[cls_5]]
+== Organizational controls
+
+[[cls_5.1]]
+=== Clause 5.1
+
+Clause:: 5.1
+Maps_27002_2013:: urn:iso:std:iso-iec:27002:ed-2:en:clause:5.1.1, urn:iso:std:iso-iec:27002:ed-2:en:clause:5.1.2
+Type:: Preventive
+Property:: Confidentiality, Integrity, Availability
+Concept:: Identify
+Capability:: Governance
+Domain:: Governance_and_Ecosystem, Resilience
+
+[[control_5.1]]
+==== Control
+
+Information security policy and topic-specific policies should be defined,
+approved by management, published, communicated to and acknowledged by
+relevant personnel and relevant interested parties, and reviewed at planned
+intervals and if significant changes occur.
+
+[[purpose_5.1]]
+==== Purpose
+
+To ensure continuing suitability, adequacy, effectiveness of management
+direction and support for information security in accordance with
+business, legal, statutory, regulatory and contractual requirements.
+
+[[scls_5-1]]
+==== Guidance
+
+[[guidance_5.1_part_1]] At the highest level, the organization should define an “information security policy” which is approved by top management and which sets out the organization’s approach to managing its information security.
+
+[[guidance_5.1_part_2]] The information security policy should take into consideration requirements derived from:
+
+* [[guidance_5.1_part_2_1]] business strategy and requirements;
+
+* [[guidance_5.1_part_2_2]] regulations, legislation and contracts;
+
+* [[guidance_5.1_part_2_3]] the current and projected information security risks and threats.
+
+[[guidance_5.1_part_3]] The information security policy should contain statements concerning:
+
+* [[guidance_5.1_part_3_1]] definition of information security;
+
+* [[guidance_5.1_part_3_2]] information security objectives or the framework for setting information security objectives;
+
+* [[guidance_5.1_part_3_3]] principles to guide all activities relating to information security;
+
+* [[guidance_5.1_part_3_4]] commitment to satisfy applicable requirements related to information security;
+
+* [[guidance_5.1_part_3_5]] commitment to continual improvement of the information security management system;
+
+* [[guidance_5.1_part_3_6]] assignment of responsibilities for information security management to defined roles;
+
+* [[guidance_5.1_part_3_7]] procedures for handling exemptions and exceptions.
+
+[[guidance_5.1_part_4]] Top management should approve any changes to the information security policy.
+
+[[guidance_5.1_part_5]] At a lower level, the information security policy should be supported by topic-specific policies as needed, to further mandate the implementation of information security controls. Topic-specific policies are typically structured to address the needs of certain target groups within an organization or to cover certain security areas. Topic-specific policies should be aligned with and complementary to the information security policy of the organization.
+
+[[guidance_5.1_part_6]] Examples of such topics include:
+
+* [[guidance_5.1_part_6_1]] access control;
+
+* [[guidance_5.1_part_6_2]] physical and environmental security;
+
+* [[guidance_5.1_part_6_3]] asset management;
+
+* [[guidance_5.1_part_6_4]] information transfer;
+
+* [[guidance_5.1_part_6_5]] secure configuration and handling of user endpoint devices;
+
+* [[guidance_5.1_part_6_6]] networking security;
+
+* [[guidance_5.1_part_6_7]] information security incident management;
+
+* [[guidance_5.1_part_6_8]] backup;
+
+* [[guidance_5.1_part_6_9]] cryptography and key management;
+
+* [[guidance_5.1_part_6_10]] information classification and handling;
+
+* [[guidance_5.1_part_6_11]] management of technical vulnerabilities;
+
+* [[guidance_5.1_part_6_12]] secure development.
+
+[[guidance_5.1_part_7]] The responsibility for the development, review and approval of the topic-specific policies should be allocated to relevant personnel based on their appropriate level of authority and technical competency. The review should include assessing opportunities for improvement of the organization’s information security policy and topic-specific policies and managing information security in response to changes to:
+
+* [[guidance_5.1_part_7_1]] the organization’s business strategy;
+
+* [[guidance_5.1_part_7_2]] the organization’s technical environment;
+
+* [[guidance_5.1_part_7_3]] regulations, statutes, legislation and contracts;
+
+* [[guidance_5.1_part_7_4]] information security risks;
+
+* [[guidance_5.1_part_7_5]] the current and projected information security threat environment;
+
+* [[guidance_5.1_part_7_6]] lessons learned from information security events and incidents.
+
+[[guidance_5.1_part_8]] The review of information security policy and topic-specific policies should take the results of management reviews and audits into account. Review and update of other related policies should be considered when one policy is changed to maintain consistency.
+
+[[guidance_5.1_part_9]] The information security policy and topic-specific policies should be communicated to relevant personnel and interested parties in a form that is relevant, accessible and understandable to the intended reader. Recipients of the policies should be required to acknowledge they understand and agree to comply with the policies where applicable. The organization can determine the formats and names of these policy documents that meet the organization’s needs. In some organizations, the information security policy and topic-specific policies can be in a single document. The organization can name these topic-specific policies as standards, directives, policies or others.
+
+[[guidance_5.1_part_10]] If the information security policy or any topic-specific policy is distributed outside the organization, care should be taken not to improperly disclose confidential information.
+
+[[guidance_5.1_part_11]] Differences between information security policy and topic-specific policy illustrates the differences between information security policy and topic-specific policy.
+
+.Differences between information security policy and topic-specific policy
+|===
+|  | *Information security policy* | *Topic-specific policy*
+|*Level of detail* | General or high-level | Specific and detailed
+|*Documented and formally approved by* | Top management | Appropriate level of management
+|===
+
+[[other_info_5.1]]
+==== Other Info
+
+[[other_info_5.1_part_1]] Topic-specific policies can vary across organizations.
