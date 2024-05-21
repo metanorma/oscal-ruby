@@ -110,3 +110,6 @@ Everyone interacting in the Oscal project's codebases, issue trackers, chat room
 == LICENSE
 
 Copyright Ribose. The OSCAL schema is published by NIST.
+
+Published under the 2-clause BSD license.
+
