@@ -1,14 +1,15 @@
 module Oscal
   module OscalDatatype
-    def validate
-      unless self.class::PATTERN.match?(@value)
-        raise Oscal::InvalidTypeError
+    def validate(value)
+      unless self.class::PATTERN.match?(value)
+        raise Oscal::InvalidTypeError,
+              "#{value} does not match Pattern for #{self.class}"
       end
     end
 
     def initialize(value)
+      validate(value) # Will raise an Error if invalid
       @value = value
-      validate
     end
 
     def to_s
