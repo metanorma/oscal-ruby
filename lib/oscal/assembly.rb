@@ -57,7 +57,7 @@ module Oscal
       # Raise Exception if input is not a hash
       input_is_hash?(input)
 
-      # Transform the hash from String keys to Symbol Keys
+      # Transform the keys from Strings to Symbols
       sym_hash = input.transform_keys(&:to_sym)
 
       # Make sure all required and no extra keys are provided
