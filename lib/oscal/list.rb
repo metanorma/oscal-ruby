@@ -8,7 +8,7 @@ module Oscal
     end
 
     def validate_member_type(input)
-      input.each do |item|
+      input.map do |item|
         self.class::MEMBER_TYPE.new(item)
       end
     end
