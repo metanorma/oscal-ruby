@@ -28,11 +28,17 @@ module Oscal
     end
   end
 
-  # A generic class for an Array of Tokens, which appears
-  # several times in the specification
-  class TokenArray
+  # These classes define generic arrays of basic DataTypes,
+  # They appear in several different places in the Oscal specs
+  # and can be subclassed with a different name
+  class StringDataTypeArray
     include OscalArray
-    MEMBER_TYPE = Token
+    MEMBER_TYPE = StringDataType
+  end
+
+  class TokenDataTypeArray
+    include OscalArray
+    MEMBER_TYPE = TokenDataType
   end
 
   class UuidArray
@@ -116,6 +122,9 @@ module Oscal
       MEMBER_TYPE = Oscal::Link
     end
 
+    class MethodArray < StringDataTypeArray
+    end
+
     class ObjectivesAndMethodsArray
       include OscalArray
       MEMBER_TYPE = ObjectivesAndMethods
@@ -154,8 +163,7 @@ module Oscal
       MEMBER_TYPE = Risk
     end
 
-    # Inherits from a generic Array because it's just a list of "token"
-    class StatementIdArray < TokenArray
+    class StatementIdArray < TokenDataTypeArray
     end
 
     class StepArray
@@ -166,6 +174,9 @@ module Oscal
     class SubjectArray
       include OscalArray
       MEMBER_TYPE = Subject
+    end
+
+    class TypeArray < TokenDataTypeArray
     end
 
     class UserArray
