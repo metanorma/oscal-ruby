@@ -5,8 +5,10 @@ module Oscal
   module AssessmentResult
     ATTRIBUTE_TYPE_HASH = {
       activities: ActivityArray,
+      activity_uuid: Uuid,
       assessment_platforms: AssessmentPlatformArray,
       assessment_log: AssessmentLog,
+      associated_activities: AssociatedActivityArray,
       attestations: AttestationArray,
       components: ComponentArray,
       control_id: Token,
@@ -41,8 +43,10 @@ module Oscal
       start: DateTimeWithTimezone,
       statement_ids: StatementIdArray,
       steps: StepArray,
+      subjects: SubjectArray,
       tasks: AssessmentTaskArray,
       title: MarkupMultiline,
+      type: Token,
       uuid: Uuid,
       users: UserArray,
     }.freeze
