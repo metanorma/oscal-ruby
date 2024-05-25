@@ -119,7 +119,10 @@ module Oscal
     end
 
     class Observation < Assembly
-      # TODO: Define this. Punting for the time being
+      attr_accessor(*(MANDATORY = %i(uuid description methods collected).freeze),
+                    *(OPTIONAL = %i(title props links methods types origins
+                                    subjects relevent_evidence expires
+                                    remarks).freeze))
     end
 
     class RelatedControls < Assembly
@@ -161,7 +164,7 @@ module Oscal
     end
 
     class Subject < Assembly
-      attr_accessor(*(MANDATORY = %i(type).freeze),
+      attr_accessor(*(MANDATORY = %i(subject_uuid type).freeze),
                     *(OPTIONAL = %i(description props links include_all
                                     include_subjects exclude_subjects
                                     remarks).freeze))
