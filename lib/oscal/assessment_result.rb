@@ -32,7 +32,16 @@ module Oscal
     end
 
     class AssessmentTask < Assembly
-      # TODO: Define this. Punting for the time being
+      attr_accessor(*(MANDATORY = %i(uuid type title).freeze),
+                    *(OPTIONAL = %i(description props links timing dependencies
+                                    tasks associated_activities subjects
+                                    responsible_roles remarks).freeze))
+    end
+
+    class AssociatedActivity < Assembly
+      attr_accessor(*(MANDATORY = %i(activity_uuid subjects).freeze),
+                    *(OPTIONAL = %i(props links responsible_roles
+                                    remarks).freeze))
     end
 
     class Attestation < Assembly
@@ -148,6 +157,13 @@ module Oscal
       attr_accessor(*(MANDATORY = %i(uuid).freeze),
                     *(OPTIONAL = %i(title description props links
                                     reviewed_controls responsible_roles
+                                    remarks).freeze))
+    end
+
+    class Subject < Assembly
+      attr_accessor(*(MANDATORY = %i(type).freeze),
+                    *(OPTIONAL = %i(description props links include_all
+                                    include_subjects exclude_subjects
                                     remarks).freeze))
     end
 

@@ -56,6 +56,11 @@ module Oscal
       MEMBER_TYPE = AssessmentTask
     end
 
+    class AssociatedActivityArray
+      include OscalArray
+      MEMBER_TYPE = AssociatedActivity
+    end
+
     class AttestationArray
       include OscalArray
       MEMBER_TYPE = Attestation
@@ -149,12 +154,18 @@ module Oscal
       MEMBER_TYPE = Risk
     end
 
+    # Inherits from a generic Array because it's just a list of "token"
     class StatementIdArray < TokenArray
     end
 
     class StepArray
       include OscalArray
       MEMBER_TYPE = Step
+    end
+
+    class SubjectArray
+      include OscalArray
+      MEMBER_TYPE = Subject
     end
 
     class UserArray
