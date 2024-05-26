@@ -4,6 +4,7 @@ require_relative "common_utils"
 require_relative "base_class"
 require_relative "assembly"
 require_relative "metadata_block"
+require_relative "datatypes"
 
 module Oscal
   module AssessmentResult
@@ -44,6 +45,10 @@ module Oscal
                                     remarks).freeze))
     end
 
+    class AssociatedRisk < Assembly
+      attr_accessor(*(MANDATORY = %i(risk_uuid).freeze))
+    end
+
     class Attestation < Assembly
       # TODO: Define this. Punting for the time being
     end
@@ -79,7 +84,10 @@ module Oscal
     end
 
     class Finding < Assembly
-      # TODO: Define this. Punting for the time being
+      attr_accessor(*(MANDATORY = %i(uuid title description target).freeze),
+                    *(OPTIONAL = %i(implementation_statement_uuid
+                                    related_observations related_risks
+                                    remarks).freeze))
     end
 
     class ImportAP < Assembly
@@ -132,6 +140,11 @@ module Oscal
                                     remarks).freeze))
     end
 
+    class RelatedObservation < Assembly
+      attr_accessor(*(MANDATORY = %i(observation_uuid).freeze),
+                    *(OPTIONAL = %i().freeze))
+    end
+
     class ResponsibleRole < Assembly
       attr_accessor(*(MANDATORY = %i(role_id).freeze),
                     *(OPTIONAL = %i(props links party_uuids remarks).freeze))
@@ -153,7 +166,33 @@ module Oscal
     end
 
     class Risk < Assembly
-      # TODO: Define this. Punting for the time being
+      attr_accessor(*(MANDATORY = %i(uuid title description statement
+                                     status).freeze),
+                    *(OPTIONAL = %i(propse links origins threat_ids
+                                    characterizations mitigating_factors
+                                    deadline remediations risk_log
+                                    related_observations).freeze))
+    end
+
+    class Status
+      # Status is defined twice, once as a datatype, once as an assembly - this class figures out which is which
+      def initialize(input)
+        if input.instance_of? String
+          StatusString.new(input)
+        elsif input.instance_of? Hash
+          StatusAssembly.new(input)
+        else
+          raise Oscal::InvalidTypeError, "status must be a string or assembly"
+        end
+      end
+    end
+
+    class StatusString < TokenDataType
+    end
+
+    class StatusAssembly < Assembly
+      attr_accessor(*(MANDATORY = %i(state).freeze),
+                    *(OPTIONAL = %i(reason remarks).freeze))
     end
 
     class Step < Assembly
@@ -164,10 +203,16 @@ module Oscal
     end
 
     class Subject < Assembly
-      attr_accessor(*(MANDATORY = %i(subject_uuid type).freeze),
-                    *(OPTIONAL = %i(description props links include_all
+      attr_accessor(*(OPTIONAL = %i(subject_uuid type
+                                    description props links include_all
                                     include_subjects exclude_subjects
                                     remarks).freeze))
+    end
+
+    class Target < Assembly
+      attr_accessor(*(MANDATORY = %i(type target_id status).freeze),
+                    *(OPTIONAL = %i(title description props links
+                                    implementation_status remarks).freeze))
     end
 
     class Task < Assembly
