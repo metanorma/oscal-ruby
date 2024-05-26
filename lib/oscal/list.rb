@@ -148,6 +148,16 @@ module Oscal
       MEMBER_TYPE = Property
     end
 
+    class RelatedObservationArray
+      include OscalArray
+      MEMBER_TYPE = RelatedObservation
+    end
+
+    class RelatedRiskArray
+      include OscalArray
+      MEMBER_TYPE = AssociatedRisk
+    end
+
     class ResponsibleRoleArray
       include OscalArray
       MEMBER_TYPE = ResponsibleRole
