@@ -1,5 +1,5 @@
 module Oscal
-  module OscalDatatype
+  class OscalDatatype < String
     include ParsingLogger
 
     def validate(value)
@@ -11,11 +11,11 @@ module Oscal
     end
 
     def initialize(input)
+      super
       @logger = get_logger
       @logger.debug("#{self.class}.new called with #{input.to_s[0, 25]}")
       validate(input) # Will raise an Error if invalid
       @logger.debug("validation successful.")
-      @value = input
     end
 
     def to_s
@@ -23,34 +23,28 @@ module Oscal
     end
   end
 
-  class DateTimeWithTimezoneDataType
-    include OscalDatatype
+  class DateTimeWithTimezoneDataType < OscalDatatype
     PATTERN = /(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))/
   end
 
-  class MarkupMultilineDataType
-    include OscalDatatype
+  class MarkupMultilineDataType < OscalDatatype
     # Note that there are complex rules for MarkupMultilineDataType that we are ignoring
     PATTERN = /.*/
   end
 
-  class StringDataType
-    include Oscal::OscalDatatype
+  class StringDataType < OscalDatatype
     PATTERN = /\S(.*\S)?/
   end
 
-  class TokenDataType
-    include OscalDatatype
+  class TokenDataType < OscalDatatype
     PATTERN = /(\p{L}|_)(\p{L}|\p{N}|[.\-_])*/
   end
 
-  class UriReference
-    include OscalDatatype
+  class UriReference < OscalDatatype
     PATTERN = %r{^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?}
   end
 
-  class Uuid
-    include OscalDatatype
+  class Uuid < OscalDatatype
     PATTERN = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[45][0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/
   end
 end
