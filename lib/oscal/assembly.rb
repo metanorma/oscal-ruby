@@ -76,7 +76,7 @@ module Oscal
       @logger = get_logger
       @logger.debug("#{self.class}.new called with #{input.to_s[0, 25]}")
 
-      # Raise Exception if input is not a hash
+      # covert String:String to Symbol:String
       sym_hash = check_and_normalize_input(input)
 
       # Make sure all required and no extra keys are provided
@@ -84,7 +84,7 @@ module Oscal
 
       # Attempt to convert each value to it's registered type
       sym_hash.each do |key, value|
-        sym_hash[key] = validate_content(key, value)
+        method("#{key}=".to_sym).call(validate_content(key, value))
       end
     end
   end
