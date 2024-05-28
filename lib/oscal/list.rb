@@ -3,27 +3,20 @@ require_relative("property")
 require_relative("logger")
 
 module Oscal
-  module OscalArray
+  class OscalArray < Array
     include ParsingLogger
-    def input_is_array?(input)
-      @logger.debug("#{self.class} checking to see if input was an Array.")
-      unless input.is_a? Array
-        raise InvalidTypeError,
-              "#{self.class} must be an Array. Received #{input.class}."
-      end
-    end
 
     def validate_member_type(input)
-      @logger.debug("Transforming Array elements to the expected type: #{self.class::MEMBER_TYPE}")
+      @logger.debug("Validating array members are #{self.class::MEMBER_TYPE}")
       input.map do |item|
         self.class::MEMBER_TYPE.new(item)
       end
     end
 
     def initialize(input)
+      super
       @logger = get_logger
       @logger.debug("#{self.class}.new called with #{input.to_s[0, 25]}")
-      input_is_array?(input)
       validate_member_type(input)
     end
   end
@@ -31,166 +24,136 @@ module Oscal
   # These classes define generic arrays of basic DataTypes,
   # They appear in several different places in the Oscal specs
   # and can be subclassed with a different name
-  class StringDataTypeArray
-    include OscalArray
+  class StringDataTypeArray < Oscal::OscalArray
     MEMBER_TYPE = StringDataType
   end
 
-  class TokenDataTypeArray
-    include OscalArray
+  class TokenDataTypeArray < Oscal::OscalArray
     MEMBER_TYPE = TokenDataType
   end
 
-  class UuidArray
-    include OscalArray
+  class UuidArray < Oscal::OscalArray
     MEMBER_TYPE = Uuid
   end
 
   module AssessmentResult
-    class ActivityArray
-      include OscalArray
+    class ActivityArray < Oscal::OscalArray
       MEMBER_TYPE = Activity
     end
 
-    class AssessmentPlatformArray
-      include OscalArray
+    class AssessmentPlatformArray < Oscal::OscalArray
       MEMBER_TYPE = AssessmentPlatform
     end
 
-    class AssessmentTaskArray
-      include OscalArray
+    class AssessmentTaskArray < Oscal::OscalArray
       MEMBER_TYPE = AssessmentTask
     end
 
-    class AssociatedActivityArray
-      include OscalArray
+    class AssociatedActivityArray < Oscal::OscalArray
       MEMBER_TYPE = AssociatedActivity
     end
 
-    class AttestationArray
-      include OscalArray
+    class AttestationArray < Oscal::OscalArray
       MEMBER_TYPE = Attestation
     end
 
-    class ComponentArray
-      include OscalArray
+    class ComponentArray < Oscal::OscalArray
       MEMBER_TYPE = Component
     end
 
-    class ControlObjectiveSelectionArray
-      include OscalArray
+    class ControlObjectiveSelectionArray < Oscal::OscalArray
       MEMBER_TYPE = ControlObjectiveSelection
     end
 
-    class ControlSelectionArray
-      include Oscal::OscalArray
+    class ControlSelectionArray < Oscal::OscalArray
       MEMBER_TYPE = ControlSelection
     end
 
-    class EntryArray
-      include OscalArray
+    class EntryArray < Oscal::OscalArray
       MEMBER_TYPE = Entry
     end
 
-    class ExcludeControlArray
-      include OscalArray
+    class ExcludeControlArray < Oscal::OscalArray
       MEMBER_TYPE = ExcludeControl
     end
 
-    class ExcludeObjectiveArray
-      include OscalArray
+    class ExcludeObjectiveArray < Oscal::OscalArray
       MEMBER_TYPE = ExcludeObjective
     end
 
-    class FindingArray
-      include OscalArray
+    class FindingArray < Oscal::OscalArray
       MEMBER_TYPE = Finding
     end
 
-    class IncludeControlArray
-      include OscalArray
+    class IncludeControlArray < Oscal::OscalArray
       MEMBER_TYPE = IncludeControl
     end
 
-    class InventoryItemArray
-      include OscalArray
+    class InventoryItemArray < Oscal::OscalArray
       MEMBER_TYPE = InventoryItem
     end
 
-    class LinkArray
-      include OscalArray
+    class LinkArray < Oscal::OscalArray
       MEMBER_TYPE = Oscal::Link
     end
 
     class MethodArray < StringDataTypeArray
     end
 
-    class ObjectivesAndMethodsArray
-      include OscalArray
+    class ObjectivesAndMethodsArray < Oscal::OscalArray
       MEMBER_TYPE = ObjectivesAndMethods
     end
 
-    class ObservationArray
-      include OscalArray
+    class ObservationArray < Oscal::OscalArray
       MEMBER_TYPE = Observation
     end
 
-    class PartArray
-      include OscalArray
+    class PartArray < Oscal::OscalArray
       MEMBER_TYPE = Link
     end
 
     class PartyUuidArray < UuidArray
     end
 
-    class PropArray
-      include OscalArray
+    class PropArray < Oscal::OscalArray
       MEMBER_TYPE = Property
     end
 
-    class RelatedObservationArray
-      include OscalArray
+    class RelatedObservationArray < Oscal::OscalArray
       MEMBER_TYPE = RelatedObservation
     end
 
-    class RelatedRiskArray
-      include OscalArray
+    class RelatedRiskArray < Oscal::OscalArray
       MEMBER_TYPE = AssociatedRisk
     end
 
-    class ResponsibleRoleArray
-      include OscalArray
+    class ResponsibleRoleArray < Oscal::OscalArray
       MEMBER_TYPE = ResponsibleRole
     end
 
-    class ResultArray
-      include OscalArray
+    class ResultArray < Oscal::OscalArray
       MEMBER_TYPE = Result
     end
 
-    class RiskArray
-      include OscalArray
+    class RiskArray < Oscal::OscalArray
       MEMBER_TYPE = Risk
     end
 
     class StatementIdArray < TokenDataTypeArray
     end
 
-    class StepArray
-      include OscalArray
+    class StepArray < Oscal::OscalArray
       MEMBER_TYPE = Step
     end
 
-    class SubjectArray
-      include OscalArray
+    class SubjectArray < Oscal::OscalArray
       MEMBER_TYPE = Subject
     end
 
     class TypeArray < TokenDataTypeArray
     end
 
-    class UserArray
-      include OscalArray
+    class UserArray < Oscal::OscalArray
       MEMBER_TYPE = User
     end
   end
