@@ -4,7 +4,6 @@ require_relative "logger"
 module Oscal
   class Assembly
     include Oscal::ParsingFunctions
-    include Serializer
     include Oscal::ParsingLogger
 
     def mandatory_attributes
@@ -20,6 +19,25 @@ module Oscal
         mandatory_attributes + self.class::OPTIONAL
       else
         mandatory_attributes
+      end
+    end
+
+    def to_json(*)
+      to_h.to_json(*)
+    end
+
+    def to_h(*)
+      allowed_attributes.each_with_object({}) do |var, hash|
+        attr_value = method(var).call
+        hash[sym2str(var)] = if attr_value == nil
+                               next
+                             elsif attr_value.class <= OscalArray
+                               attr_value.each(&:to_h)
+                             elsif attr_value.class <= OscalDatatype
+                               attr_value
+                             else
+                               attr_value.to_h
+                             end
       end
     end
 
