@@ -175,7 +175,8 @@ module Oscal
     end
 
     class Status
-      # Status is defined twice, once as a datatype, once as an assembly - this class figures out which is which
+      # Status is defined twice, once as a datatype, once as an assembly
+      # this class figures out which is which
       def initialize(input)
         if input.instance_of? String
           StatusString.new(input)
