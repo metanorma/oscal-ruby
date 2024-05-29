@@ -1,7 +1,17 @@
 require_relative "parsing_functions"
 require_relative "logger"
+require_relative "metadata_block"
 
 module Oscal
+  class MetadataBlockWrapper < Oscal::MetadataBlock
+    include ParsingFunctions
+    def initialize(metadata_hash)
+      # MetadataBlock likes to get strings, but may sometimes get symbols
+      # this little function makes sure it gets strings everytime
+      super(metadata_hash.transform_keys { |key| sym2str(key) })
+    end
+  end
+
   class Assembly
     include Oscal::ParsingFunctions
     include Oscal::ParsingLogger
