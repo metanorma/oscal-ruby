@@ -1,7 +1,3 @@
-require "date"
-require_relative "serializer"
-require_relative "common_utils"
-require_relative "base_class"
 require_relative "assembly"
 require_relative "metadata_block"
 require_relative "datatypes"
