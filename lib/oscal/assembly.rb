@@ -32,11 +32,11 @@ module Oscal
       end
     end
 
-    def to_json(*)
-      to_h.to_json(*)
+    def to_json
+      to_h.to_json
     end
 
-    def to_h(*)
+    def to_h
       allowed_attributes.each_with_object({}) do |var, hash|
         attr_value = method(var).call
         hash[sym2str(var)] = if attr_value == nil
