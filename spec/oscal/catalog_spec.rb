@@ -9,7 +9,7 @@ RSpec.describe Oscal::Catalog do
 
   it "parses oscal-content YAML" do
     expect(subject.class).to be Oscal::Catalog
-    expect(subject.groups.first.groups.first.parts.first.prose).to eq(
+    expect(subject.groups.first.groups.first.controls.first.parts.first.prose).to eq(
       "To establish a management framework to initiate and " \
       "control the implementation and operation of information security " \
       "within the organization.",
