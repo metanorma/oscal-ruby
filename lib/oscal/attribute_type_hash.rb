@@ -41,6 +41,7 @@ module Oscal
     parts: AssessmentResult::PartArray,
     party_uuids: AssessmentResult::PartyUuidArray,
     props: AssessmentResult::PropArray,
+    reason: TokenDataType,
     related_controls: AssessmentResult::RelatedControls,
     related_observations: AssessmentResult::RelatedObservationArray,
     related_risks: AssessmentResult::RelatedRiskArray,
