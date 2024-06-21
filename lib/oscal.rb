@@ -7,4 +7,8 @@ module Oscal
 
   class UnknownAttributeError < Error; end
   class InvalidTypeError < Error; end
+
+  def self.root_path
+    @root_path ||= Pathname.new(File.dirname(__dir__))
+  end
 end
