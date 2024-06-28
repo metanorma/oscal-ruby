@@ -1,8 +1,12 @@
 module Oscal
   module ParsingLogger
     require "logger"
+    def self.logger=(value)
+      @@logger = value
+    end
+
     def get_logger
-      Logger.new($stdout)
+      @@logger ||= Logger.new($stdout)
     end
   end
 end
