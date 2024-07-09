@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../spec_helper"
+
 RSpec.describe Oscal::Catalog do
   let(:subject) do
     Oscal::Catalog.load_from_yaml(
