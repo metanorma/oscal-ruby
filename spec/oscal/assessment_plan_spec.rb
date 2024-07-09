@@ -15,7 +15,7 @@ RSpec.describe Oscal::AssessmentPlan::AssessmentPlan do
 
   describe "#to_json" do
     it "generates a json representation of the assessment plan" do
-      expect(subject.to_json).to be_kind_of(String)
+      expect(subject.to_json).to eq(JSON.generate(fields))
     end
   end
 end

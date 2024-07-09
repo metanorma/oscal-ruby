@@ -1,6 +1,7 @@
 require_relative "parsing_functions"
 require_relative "logger"
 require_relative "metadata_block"
+require "json"
 
 module Oscal
   class MetadataBlockWrapper < Oscal::MetadataBlock
@@ -32,8 +33,8 @@ module Oscal
       end
     end
 
-    def to_json
-      to_h.to_json
+    def to_json(*args)
+      to_h.to_json(*args)
     end
 
     def to_h
